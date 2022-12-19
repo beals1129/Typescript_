@@ -68,6 +68,7 @@ const heekyung : Plyaer = {
 <br>
 <br>
 위 코드를 type 로 작성하면
+
 ```js
 type User = {
    name : string
@@ -80,5 +81,63 @@ const heekyung : Player = {
 }
 ```
 
-둘 다 사용해도 됨.
+둘 다 사용해도 됨.<br>
 문법적 차이가 있을 뿐임
+
+#### interface 의 이름이 같으면 한번에 합쳐줌
+
+```js
+interface User {
+   health : number
+}
+
+interface User {
+   firstname : string
+}
+
+interface User {
+   lastname : string
+}
+
+const heekyung : User = {
+   firstname : "ryu",
+   lastname : "hk",
+   health : 100
+}
+```
+
+### 추상클래스에서 interface 사용
+
+- 추상 클래스를 type 으로 했을 때와 interface로 했을 때 다르게 작성함
+- interface는  private를 사용할 수 없다. protected 또한. > public 사용
+- type 를 사용할 때 보다 컴파일 된 js 파일의 길이, 크기를 줄일 수 있다.
+- 여러개의 interface를 상속할 수 있다. `inplements`를 사용! 
+```js
+interface User {
+   firstName : string,
+   lastName : string,
+   sayHi(name:string) : string
+   fullName():string
+}
+// 추가적인 interface 상속
+interface Human{
+   health : number
+}
+// 쉼표로 추가
+class Player implements User, Human {
+   constructor(
+      public firstName : string,
+      public lastName : string,
+      public health : number
+   ){}
+   fullName(){
+      return ``
+   }
+   sayHi(name:string){
+      return ``
+   }
+
+}
+```
+
+인터페이스를 return 한다면 new User() 로 사용하지 않고 컨텐츠를 넣어주는 방향으로 진행한다.
